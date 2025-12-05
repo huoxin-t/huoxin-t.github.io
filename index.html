@@ -172,8 +172,6 @@
 
         const STATE = {
             mode: 'TREE', 
-            focusIndex: -1, 
-            focusTarget: null,
             hand: { detected: false, x: 0, y: 0 },
             rotation: { x: 0, y: 0 } 
         };
@@ -330,23 +328,13 @@
                 );
             }
 
-            update(dt, mode, focusTargetMesh) {
+            update(dt, mode) {
                 let target = this.posTree;
                 
                 if (mode === 'SCATTER') target = this.posScatter;
-                else if (mode === 'FOCUS') {
-                    if (this.mesh === focusTargetMesh) {
-                        const desiredWorldPos = new THREE.Vector3(0, 2, 35);
-                        const invMatrix = new THREE.Matrix4().copy(mainGroup.matrixWorld).invert();
-                        target = desiredWorldPos.applyMatrix4(invMatrix);
-                    } else {
-                        target = this.posScatter;
-                    }
-                }
 
                 // Movement Easing
-                const lerpSpeed = (mode === 'FOCUS' && this.mesh === focusTargetMesh) ? 5.0 : 2.0; 
-                this.mesh.position.lerp(target, lerpSpeed * dt);
+                this.mesh.position.lerp(target, 2.0 * dt);
 
                 // Rotation Logic - CRITICAL: Ensure spin happens in Scatter
                 if (mode === 'SCATTER') {
@@ -359,10 +347,6 @@
                     this.mesh.rotation.z = THREE.MathUtils.lerp(this.mesh.rotation.z, 0, dt);
                     this.mesh.rotation.y += 0.5 * dt; 
                 }
-                
-                if (mode === 'FOCUS' && this.mesh === focusTargetMesh) {
-                    this.mesh.lookAt(camera.position); 
-                }
 
                 // Scale Logic
                 let s = this.baseScale;
@@ -372,9 +356,6 @@
                 } else if (mode === 'SCATTER' && this.type === 'PHOTO') {
                     // Large preview size in scatter
                     s = this.baseScale * 2.5; 
-                } else if (mode === 'FOCUS') {
-                    if (this.mesh === focusTargetMesh) s = 4.5; 
-                    else s = this.baseScale * 0.8; 
                 }
                 
                 this.mesh.scale.lerp(new THREE.Vector3(s,s,s), 4*dt);
@@ -595,25 +576,16 @@
                 STATE.hand.x = (lm[9].x - 0.5) * 2; 
                 STATE.hand.y = (lm[9].y - 0.5) * 2;
 
-                const thumb = lm[4]; const index = lm[8]; const wrist = lm[0];
-                const pinchDist = Math.hypot(thumb.x - index.x, thumb.y - index.y);
                 const tips = [lm[8], lm[12], lm[16], lm[20]];
+                const wrist = lm[0];
                 let avgDist = 0;
                 tips.forEach(t => avgDist += Math.hypot(t.x - wrist.x, t.y - wrist.y));
                 avgDist /= 4;
 
-                if (pinchDist < 0.05) {
-                    if (STATE.mode !== 'FOCUS') {
-                        STATE.mode = 'FOCUS';
-                        const photos = particleSystem.filter(p => p.type === 'PHOTO');
-                        if (photos.length) STATE.focusTarget = photos[Math.floor(Math.random()*photos.length)].mesh;
-                    }
-                } else if (avgDist < 0.25) {
+                if (avgDist < 0.25) {
                     STATE.mode = 'TREE';
-                    STATE.focusTarget = null;
                 } else if (avgDist > 0.4) {
                     STATE.mode = 'SCATTER';
-                    STATE.focusTarget = null;
                 }
             } else {
                 STATE.hand.detected = false;
@@ -660,7 +632,7 @@
             mainGroup.rotation.y = STATE.rotation.y;
             mainGroup.rotation.x = STATE.rotation.x;
 
-            particleSystem.forEach(p => p.update(dt, STATE.mode, STATE.focusTarget));
+            particleSystem.forEach(p => p.update(dt, STATE.mode));
             composer.render();
         }
 
