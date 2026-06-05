@@ -1,0 +1,165 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Cascadia Code', ui-monospace, Consolas, monospace;
+
+  --color-accent: #2563eb;
+  --color-accent-light: #eff6ff;
+  --color-accent-dark: #1d4ed8;
+
+  --color-bg: #f8fafc;
+  --color-surface: #ffffff;
+  --color-text: #1e293b;
+  --color-muted: #64748b;
+  --color-faint: #94a3b8;
+  --color-border: #e2e8f0;
+  --color-border-light: #f1f5f9;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
+
+  body {
+    @apply bg-bg text-text antialiased font-sans;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  a {
+    @apply text-accent no-underline transition-colors;
+  }
+
+  a:hover {
+    @apply text-accent-dark;
+  }
+
+  ::selection {
+    @apply bg-accent/20;
+  }
+}
+
+/* Sidebar link hover with subtle left border indicator */
+.sidebar-link {
+  @apply relative pl-3 -ml-3 rounded-sm transition-colors;
+}
+
+.sidebar-link:hover {
+  @apply bg-accent-light;
+}
+
+.sidebar-link.active {
+  @apply text-accent font-medium;
+}
+
+.sidebar-link.active::after {
+  content: '';
+  @apply absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-4 bg-accent rounded-full;
+}
+
+/* Section label with rule */
+.section-label {
+  @apply text-xs font-semibold tracking-widest text-muted uppercase mb-6 flex items-center gap-3;
+}
+
+.section-label::after {
+  content: '';
+  @apply flex-1 h-px bg-border;
+}
+
+/* Publication entry */
+.pub-entry {
+  @apply py-4 border-b border-border-light last:border-0;
+}
+
+.pub-entry .pub-year {
+  @apply text-xs font-mono text-faint min-w-[3rem];
+}
+
+.pub-entry .pub-title {
+  @apply text-base font-semibold text-text leading-snug;
+}
+
+.pub-entry .pub-title:hover {
+  @apply text-accent;
+}
+
+.pub-entry .pub-authors {
+  @apply text-sm text-muted mt-1;
+}
+
+.pub-entry .pub-authors .self {
+  @apply font-semibold text-text underline underline-offset-2 decoration-accent/30;
+}
+
+.pub-entry .pub-venue {
+  @apply text-sm text-muted italic;
+}
+
+.pub-entry .pub-links {
+  @apply flex gap-3 mt-1.5 text-xs font-medium;
+}
+
+.pub-entry .pub-links a {
+  @apply inline-flex items-center gap-1 text-muted hover:text-accent transition-colors;
+}
+
+/* News / timeline item */
+.news-item {
+  @apply flex gap-4 py-3 border-b border-border-light last:border-0;
+}
+
+.news-item .news-date {
+  @apply text-xs font-mono text-faint min-w-[5.5rem] pt-0.5;
+}
+
+.news-item .news-content {
+  @apply text-sm text-text leading-relaxed;
+}
+
+/* Profile image placeholder */
+.profile-ring {
+  @apply w-32 h-32 rounded-full bg-gradient-to-br from-accent/20 to-accent/10
+         flex items-center justify-center border-2 border-border shadow-sm;
+}
+
+/* Tag / badge */
+.tag {
+  @apply inline-block text-xs font-medium px-2.5 py-0.5 rounded-full
+         bg-accent-light text-accent;
+}
+
+/* Horizontal rule */
+hr.section-divider {
+  @apply border-0 h-px bg-border my-0;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #0f172a;
+    --color-surface: #1e293b;
+    --color-text: #e2e8f0;
+    --color-muted: #94a3b8;
+    --color-faint: #64748b;
+    --color-border: #334155;
+    --color-border-light: #1e293b;
+    --color-accent-light: #1e3a5f;
+  }
+
+  body {
+    @apply bg-bg text-text;
+  }
+
+  .profile-ring {
+    @apply border-border;
+  }
+}
+
+/* Print styles */
+@media print {
+  body { @apply bg-white text-black; }
+  .no-print { display: none !important; }
+}

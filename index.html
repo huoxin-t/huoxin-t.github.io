@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Huoxin &mdash; 个人主页</title>
+    <meta name="description" content="个人作品展示与博客。" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body class="min-h-screen">
+
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row gap-0">
+
+      <!-- ========== 侧边栏 ========== -->
+      <aside class="
+        md:sticky md:top-0 md:h-screen
+        w-full md:w-64 lg:w-72 shrink-0
+        bg-surface md:border-r border-border
+        flex flex-col items-center md:items-start
+        px-6 md:px-8 py-10 md:py-14
+        text-center md:text-left
+      ">
+        <!-- 头像 -->
+        <div class="profile-ring mb-5">
+          <span class="text-4xl font-bold text-accent select-none">H</span>
+        </div>
+
+        <h1 class="text-xl font-bold text-text tracking-tight mb-1">Huoxin</h1>
+        <p class="text-sm text-muted mb-6 leading-relaxed">
+          前端工程师 / 开源爱好者
+        </p>
+
+        <!-- 导航 -->
+        <nav class="w-full mb-8" aria-label="主导航">
+          <ul class="space-y-1 text-sm">
+            <li><a href="#about"      class="sidebar-link active block py-1.5 text-text">关于</a></li>
+            <li><a href="#portfolio"  class="sidebar-link block py-1.5 text-muted">作品集</a></li>
+            <li><a href="/blog/"      class="sidebar-link block py-1.5 text-muted">博客</a></li>
+            <li><a href="#contact"    class="sidebar-link block py-1.5 text-muted">联系</a></li>
+          </ul>
+        </nav>
+
+        <!-- 社交链接 -->
+        <div class="flex md:flex-col items-center md:items-start gap-2 md:gap-1 text-xs text-muted">
+          <a href=" https://github.com/huoxin-t" target="_blank" rel="noopener"
+             class="inline-flex items-center gap-2 py-1 hover:text-accent transition-colors">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.73.083-.73 1.205.085 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.418-1.305.762-1.604-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12 24 5.37 18.63 0 12 0z"/></svg>
+            <span>GitHub</span>
+          </a>
+          <a href="mailto:a1739896218@gmail.com"
+             class="inline-flex items-center gap-2 py-1 hover:text-accent transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <span>Email</span>
+          </a>
+        </div>
+
+        <p class="mt-auto pt-8 text-xs text-faint hidden md:block">
+          &copy; 2026 Huoxin
+        </p>
+      </aside>
+
+      <!-- ========== 主内容区 ========== -->
+      <main class="flex-1 min-w-0 bg-surface md:bg-bg">
+
+        <!-- 关于 -->
+        <section id="about" class="bg-surface md:bg-transparent px-6 md:px-10 lg:px-14 py-12 md:py-16">
+          <div class="section-label">关于</div>
+          <p class="text-text leading-relaxed mb-4 max-w-prose">
+            你好，我是 Huoxin，一名前端工程师，专注于 Web 标准、构建工具链与 UI 工程化。
+            热衷于打造高性能、可访问的 Web 体验，喜欢探索设计与工程的交叉领域。
+          </p>
+          <p class="text-muted leading-relaxed max-w-prose">
+            目前在前端生态中参与开源工具的开发，曾为多个设计系统和组件库做出贡献。
+            我会在<a href="/blog/" class="text-accent font-medium">博客</a>中记录学习与思考。
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <span class="tag">JavaScript</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">React</span>
+            <span class="tag">Vite</span>
+            <span class="tag">Tailwind CSS</span>
+            <span class="tag">设计系统</span>
+            <span class="tag">Web 性能</span>
+          </div>
+        </section>
+
+        <hr class="section-divider mx-6 md:mx-10 lg:mx-14" />
+
+        <!-- 作品集 -->
+        <section id="portfolio" class="px-6 md:px-10 lg:px-14 py-12 md:py-16">
+          <div class="section-label">作品集</div>
+
+          <!-- 项目卡片 1 -->
+          <div class="mb-12 bg-surface border border-border rounded-xl overflow-hidden hover:shadow-md transition-shadow group">
+            <div class="aspect-video bg-border-light flex items-center justify-center text-faint text-sm">
+              <!-- 替换为图片：<img src="/images/project-1.png" alt="项目截图" class="w-full h-full object-cover" /> -->
+              <span class="text-6xl select-none">🖼️</span>
+            </div>
+            <div class="p-6">
+              <h3 class="text-lg font-semibold text-text mb-2 group-hover:text-accent transition-colors">
+                项目一：响应式组件库
+              </h3>
+              <p class="text-muted text-sm leading-relaxed mb-4">
+                一套轻量级的 React 组件库，内置深色模式支持与完整的可访问性特性。
+                所有组件经过单元测试与 E2E 测试覆盖，兼容主流浏览器。
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="tag">React</span>
+                <span class="tag">TypeScript</span>
+                <span class="tag">Tailwind CSS</span>
+              </div>
+              <div class="flex gap-4 text-sm">
+                <a href="#" class="inline-flex items-center gap-1 text-accent font-medium hover:underline">在线演示 &rarr;</a>
+                <a href="#" class="inline-flex items-center gap-1 text-muted hover:text-accent transition-colors">源代码 &rarr;</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 项目卡片 2 -->
+          <div class="mb-12 bg-surface border border-border rounded-xl overflow-hidden hover:shadow-md transition-shadow group">
+            <div class="aspect-video bg-border-light flex items-center justify-center text-faint text-sm">
+              <span class="text-6xl select-none">🖼️</span>
+            </div>
+            <div class="p-6">
+              <h3 class="text-lg font-semibold text-text mb-2 group-hover:text-accent transition-colors">
+                项目二：前端构建工具插件
+              </h3>
+              <p class="text-muted text-sm leading-relaxed mb-4">
+                为 Vite 开发的一款可视化分析插件，支持模块依赖图、构建产物体积分析、
+                及热更新性能监控面板。
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="tag">Vite</span>
+                <span class="tag">Node.js</span>
+                <span class="tag">构建工具</span>
+              </div>
+              <div class="flex gap-4 text-sm">
+                <a href="#" class="inline-flex items-center gap-1 text-accent font-medium hover:underline">在线演示 &rarr;</a>
+                <a href="#" class="inline-flex items-center gap-1 text-muted hover:text-accent transition-colors">源代码 &rarr;</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 项目卡片 3 -->
+          <div class="mb-12 bg-surface border border-border rounded-xl overflow-hidden hover:shadow-md transition-shadow group">
+            <div class="aspect-video bg-border-light flex items-center justify-center text-faint text-sm">
+              <span class="text-6xl select-none">🖼️</span>
+            </div>
+            <div class="p-6">
+              <h3 class="text-lg font-semibold text-text mb-2 group-hover:text-accent transition-colors">
+                项目三：个人静态博客模板
+              </h3>
+              <p class="text-muted text-sm leading-relaxed mb-4">
+                基于 Vite + Tailwind CSS v4 构建的极简静态博客模板，支持多页面构建、
+                自动暗色模式、Markdown 文章管理与学术风格的侧边栏布局。
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="tag">Vite</span>
+                <span class="tag">Tailwind CSS</span>
+                <span class="tag">静态站点</span>
+              </div>
+              <div class="flex gap-4 text-sm">
+                <a href="#" class="inline-flex items-center gap-1 text-accent font-medium hover:underline">在线演示 &rarr;</a>
+                <a href="#" class="inline-flex items-center gap-1 text-muted hover:text-accent transition-colors">源代码 &rarr;</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- <p class="text-xs text-faint">
+            更多项目请访问我的 <a href="https://github.com" class="text-muted hover:text-accent">GitHub</a>。
+          </p> -->
+        </section>
+
+        <hr class="section-divider mx-6 md:mx-10 lg:mx-14" />
+
+        <!-- 联系 -->
+        <section id="contact" class="px-6 md:px-10 lg:px-14 py-12 md:py-16">
+          <div class="section-label">联系</div>
+          <p class="text-muted leading-relaxed mb-4 max-w-prose">
+            欢迎交流合作、技术讨论，或者只是随便聊聊前端工程。可以通过以下方式找到我：
+          </p>
+          <div class="flex flex-wrap gap-6 text-sm text-muted">
+            <span class="inline-flex items-center gap-2">
+              <svg class="w-4 h-4 text-faint" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              a1739896218@gmail.com
+            </span>
+            <span class="inline-flex items-center gap-2">
+              <svg class="w-4 h-4 text-faint" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.73.083-.73 1.205.085 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.418-1.305.762-1.604-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12 24 5.37 18.63 0 12 0z"/></svg>
+              https://github.com/huoxin-t
+            </span>
+          </div>
+        </section>
+
+        <!-- 移动端页脚 -->
+        <footer class="md:hidden border-t border-border px-6 py-6 text-center text-xs text-faint">
+          &copy; 2026 Huoxin
+        </footer>
+
+      </main>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>博客 &mdash; Huoxin</title>
+    <meta name="description" content="前端工程、构建工具、CSS 架构等技术笔记。" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body class="min-h-screen">
+
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row gap-0">
+
+      <!-- ========== 侧边栏 ========== -->
+      <aside class="
+        md:sticky md:top-0 md:h-screen
+        w-full md:w-64 lg:w-72 shrink-0
+        bg-surface md:border-r border-border
+        flex flex-col items-center md:items-start
+        px-6 md:px-8 py-10 md:py-14
+        text-center md:text-left
+      ">
+        <a href="/" class="profile-ring mb-5 block">
+          <span class="text-4xl font-bold text-accent select-none">H</span>
+        </a>
+
+        <a href="/" class="text-xl font-bold text-text tracking-tight mb-1 no-underline hover:text-accent transition-colors">Huoxin</a>
+        <p class="text-sm text-muted mb-6 leading-relaxed">
+          前端工程师 / 开源爱好者
+        </p>
+
+        <nav class="w-full mb-8" aria-label="主导航">
+          <ul class="space-y-1 text-sm">
+            <li><a href="/#about"      class="sidebar-link block py-1.5 text-muted">关于</a></li>
+            <li><a href="/#portfolio"  class="sidebar-link block py-1.5 text-muted">作品集</a></li>
+            <li><a href="/blog/"       class="sidebar-link active block py-1.5 text-text">博客</a></li>
+            <li><a href="/#contact"    class="sidebar-link block py-1.5 text-muted">联系</a></li>
+          </ul>
+        </nav>
+
+        <p class="mt-auto pt-8 text-xs text-faint hidden md:block">
+          &copy; 2026 Huoxin
+        </p>
+      </aside>
+
+      <!-- ========== 主内容区 ========== -->
+      <main class="flex-1 min-w-0 px-6 md:px-10 lg:px-14 py-12 md:py-16">
+
+        <div class="section-label">博客</div>
+        <p class="text-muted text-sm mb-10 leading-relaxed max-w-prose">
+          前端工程、构建工具、CSS 架构以及开源工作中的经验与思考。
+        </p>
+
+        <div class="space-y-0">
+
+          <article class="pub-entry">
+            <div class="flex items-baseline gap-4">
+              <span class="pub-year">2026</span>
+              <div>
+                <a href="/blog/posts/hello-world.html" class="pub-title text-lg">
+                  使用 Vite + Tailwind CSS v4 搭建个人网站
+                </a>
+                <p class="text-sm text-muted mt-1 leading-relaxed">
+                  记录如何用 Vite 多页面支持和 Tailwind CSS-first 配置从零搭建轻量、高性能的静态博客。
+                </p>
+                <div class="flex gap-2 mt-2">
+                  <span class="tag">Vite</span>
+                  <span class="tag">Tailwind CSS</span>
+                  <span class="tag">教程</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="pub-entry">
+            <div class="flex items-baseline gap-4">
+              <span class="pub-year">2025</span>
+              <div>
+                <a href="/blog/posts/markdown-to-html.html" class="pub-title text-lg">
+                  静态站点中渲染 Markdown 的几种方案
+                </a>
+                <p class="text-sm text-muted mt-1 leading-relaxed">
+                  对比客户端 Markdown 渲染、构建时转换、纯静态 HTML 三种方案在内容型站点中的适用场景。
+                </p>
+                <div class="flex gap-2 mt-2">
+                  <span class="tag">Markdown</span>
+                  <span class="tag">静态站点</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="pub-entry">
+            <div class="flex items-baseline gap-4">
+              <span class="pub-year">2025</span>
+              <div>
+                <a href="/blog/posts/tailwind-v4-migration.html" class="pub-title text-lg">
+                  Tailwind CSS v4 迁移实战指南
+                </a>
+                <p class="text-sm text-muted mt-1 leading-relaxed">
+                  v4 带来的 CSS-first 配置、更快的构建速度等重大变化，以及实际迁移中的经验与踩坑记录。
+                </p>
+                <div class="flex gap-2 mt-2">
+                  <span class="tag">Tailwind CSS</span>
+                  <span class="tag">CSS</span>
+                  <span class="tag">迁移</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- <p class="text-xs text-faint mt-10">
+          更多文章即将发布。通过 <a href="#" class="text-muted hover:text-accent">RSS</a> 订阅。
+        </p> -->
+
+        <footer class="md:hidden border-t border-border mt-12 pt-6 text-center text-xs text-faint">
+          &copy; 2026 Huoxin
+        </footer>
+
+      </main>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

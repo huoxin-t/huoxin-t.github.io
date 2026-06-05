@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tailwind CSS v4 迁移实战指南 &mdash; Huoxin</title>
+    <meta name="description" content="v4 带来的 CSS-first 配置、更快的构建速度等重大变化，以及实际迁移中的经验与踩坑记录。" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body class="min-h-screen">
+
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row gap-0">
+
+      <!-- ========== 侧边栏 ========== -->
+      <aside class="
+        md:sticky md:top-0 md:h-screen
+        w-full md:w-64 lg:w-72 shrink-0
+        bg-surface md:border-r border-border
+        flex flex-col items-center md:items-start
+        px-6 md:px-8 py-10 md:py-14
+        text-center md:text-left
+      ">
+        <a href="/" class="profile-ring mb-5 block">
+          <span class="text-4xl font-bold text-accent select-none">H</span>
+        </a>
+
+        <a href="/" class="text-xl font-bold text-text tracking-tight mb-1 no-underline hover:text-accent transition-colors">Huoxin</a>
+        <p class="text-sm text-muted mb-6 leading-relaxed">
+          前端工程师 / 开源爱好者
+        </p>
+
+        <nav class="w-full mb-8" aria-label="主导航">
+          <ul class="space-y-1 text-sm">
+            <li><a href="/#about"      class="sidebar-link block py-1.5 text-muted">关于</a></li>
+            <li><a href="/#portfolio"  class="sidebar-link block py-1.5 text-muted">作品集</a></li>
+            <li><a href="/blog/"       class="sidebar-link block py-1.5 text-text font-medium">博客</a></li>
+            <li><a href="/#contact"    class="sidebar-link block py-1.5 text-muted">联系</a></li>
+          </ul>
+        </nav>
+
+        <p class="mt-auto pt-8 text-xs text-faint hidden md:block">
+          &copy; 2026 Huoxin
+        </p>
+      </aside>
+
+      <!-- ========== 文章正文 ========== -->
+      <main class="flex-1 min-w-0 px-6 md:px-10 lg:px-14 py-12 md:py-16">
+
+        <a href="/blog/" class="inline-flex items-center gap-1.5 text-xs font-medium text-muted hover:text-accent transition-colors mb-8">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+          返回博客列表
+        </a>
+
+        <article class="max-w-prose">
+          <header class="mb-10">
+            <h1 class="text-2xl md:text-3xl font-bold text-text leading-tight tracking-tight mb-3">
+              Tailwind CSS v4 迁移实战指南
+            </h1>
+            <div class="flex items-center gap-3 text-xs text-faint">
+              <time datetime="2025-08-10">2025-08-10</time>
+              <span>&middot;</span>
+              <span>阅读约 7 分钟</span>
+            </div>
+          </header>
+
+          <p class="text-text leading-relaxed mb-5">
+            Tailwind CSS v4 是一次重大更新，核心变化是<strong>CSS-first 配置</strong>——告别
+            <code class="text-xs bg-accent-light text-accent px-1 py-0.5 rounded font-mono">tailwind.config.js</code>
+            和 PostCSS，改用原生 CSS 管理一切。本文记录从 v3 迁移到 v4 的完整过程。
+          </p>
+
+          <h2 class="text-lg font-semibold text-text mt-10 mb-3">核心变化一览</h2>
+          <div class="overflow-x-auto mb-5">
+            <table class="w-full text-sm text-muted border border-border rounded-lg overflow-hidden">
+              <thead class="bg-border-light">
+                <tr>
+                  <th class="text-left px-4 py-2 font-medium text-text">方面</th>
+                  <th class="text-left px-4 py-2 font-medium text-text">v3</th>
+                  <th class="text-left px-4 py-2 font-medium text-text">v4</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-t border-border-light">
+                  <td class="px-4 py-2 font-medium text-text">配置方式</td>
+                  <td class="px-4 py-2">JS 文件 (tailwind.config.js)</td>
+                  <td class="px-4 py-2">CSS (@theme 块)</td>
+                </tr>
+                <tr class="border-t border-border-light">
+                  <td class="px-4 py-2 font-medium text-text">构建管道</td>
+                  <td class="px-4 py-2">PostCSS 插件</td>
+                  <td class="px-4 py-2">Vite / Webpack 插件</td>
+                </tr>
+                <tr class="border-t border-border-light">
+                  <td class="px-4 py-2 font-medium text-text">内容扫描</td>
+                  <td class="px-4 py-2"><code>content</code> 配置项</td>
+                  <td class="px-4 py-2">自动扫描（基于 Vite 模块图）</td>
+                </tr>
+                <tr class="border-t border-border-light">
+                  <td class="px-4 py-2 font-medium text-text">CSS 入口</td>
+                  <td class="px-4 py-2">@tailwind 指令</td>
+                  <td class="px-4 py-2">@import 'tailwindcss'</td>
+                </tr>
+                <tr class="border-t border-border-light">
+                  <td class="px-4 py-2 font-medium text-text">自定义主题</td>
+                  <td class="px-4 py-2">extend.theme</td>
+                  <td class="px-4 py-2">@theme { --color-* }</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2 class="text-lg font-semibold text-text mt-10 mb-3">第一步：安装与插件配置</h2>
+          <p class="text-muted text-sm leading-relaxed mb-4">
+            卸载 v3 相关依赖，安装 v4 包：
+          </p>
+
+<pre class="bg-surface border border-border rounded-lg p-5 text-xs font-mono text-muted leading-relaxed overflow-x-auto mb-4">
+npm uninstall tailwindcss postcss autoprefixer
+npm install -D tailwindcss @tailwindcss/vite
+</pre>
+
+          <p class="text-muted text-sm leading-relaxed mb-4">
+            在 <code class="text-xs bg-accent-light text-accent px-1 py-0.5 rounded font-mono">vite.config.js</code> 中注册插件，替代原来的 PostCSS：
+          </p>
+
+<pre class="bg-surface border border-border rounded-lg p-5 text-xs font-mono text-muted leading-relaxed overflow-x-auto mb-4">
+import tailwindcss from '@tailwindcss/vite'
+
+export default defineConfig({
+  plugins: [tailwindcss()],
+})
+</pre>
+
+          <p class="text-muted text-sm leading-relaxed mb-4">
+            可以删除 <code class="text-xs bg-accent-light text-accent px-1 py-0.5 rounded font-mono">postcss.config.js</code> 了。
+          </p>
+
+          <h2 class="text-lg font-semibold text-text mt-10 mb-3">第二步：迁移 CSS 入口</h2>
+          <p class="text-muted text-sm leading-relaxed mb-4">将原来的三条指令：</p>
+
+<pre class="bg-surface border border-border rounded-lg p-5 text-xs font-mono text-muted leading-relaxed overflow-x-auto mb-4">
+/* v3 — 删除 */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+</pre>
+
+          <p class="text-muted text-sm leading-relaxed mb-4">替换为一行：</p>
+
+<pre class="bg-surface border border-border rounded-lg p-5 text-xs font-mono text-muted leading-relaxed overflow-x-auto mb-5">
+/* v4 — 一行搞定 */
+@import 'tailwindcss';
+</pre>
+
+          <h2 class="text-lg font-semibold text-text mt-10 mb-3">第三步：迁移主题配置</h2>
+          <p class="text-muted text-sm leading-relaxed mb-4">
+            这是工作量最大的部分。v3 的 <code class="text-xs bg-accent-light text-accent px-1 py-0.5 rounded font-mono">tailwind.config.js</code>
+            中的主题扩展需要迁移到 CSS 的 <code class="text-xs bg-accent-light text-accent px-1 py-0.5 rounded font-mono">@theme</code> 块：
+          </p>
+
+<pre class="bg-surface border border-border rounded-lg p-5 text-xs font-mono text-muted leading-relaxed overflow-x-auto mb-4">
+/* v3 tailwind.config.js */
+theme: {
+  extend: {
+    colors: {
+      brand: { 500: '#4c6ef5', 600: '#4263eb' }
+    },
+    fontFamily: {
+      sans: ['Inter', 'system-ui', 'sans-serif']
+    }
+  }
+}
+</pre>
+
+          <p class="text-muted text-sm leading-relaxed mb-2">迁移为：</p>
+
+<pre class="bg-surface border border-border rounded-lg p-5 text-xs font-mono text-muted leading-relaxed overflow-x-auto mb-5">
+/* v4 style.css */
+@theme {
+  --color-brand-500: #4c6ef5;
+  --color-brand-600: #4263eb;
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+</pre>
+
+          <blockquote class="border-l-2 border-accent/30 pl-4 my-6 italic text-sm text-muted">
+            命名规则：v3 的 <code class="text-xs bg-accent-light text-accent px-1 py-0.5 rounded font-mono">colors.brand.500</code> 变成
+            <code class="text-xs bg-accent-light text-accent px-1 py-0.5 rounded font-mono">--color-brand-500</code>。
+            类名使用方式不变：<code class="text-xs bg-accent-light text-accent px-1 py-0.5 rounded font-mono">bg-brand-500</code>。
+          </blockquote>
+
+          <h2 class="text-lg font-semibold text-text mt-10 mb-3">第四步：处理废弃的类名</h2>
+          <p class="text-muted text-sm leading-relaxed mb-4">v4 移除或重命名了一些工具类，需要注意全局替换：</p>
+
+          <ul class="space-y-2 mb-5 text-muted text-sm leading-relaxed list-disc pl-5">
+            <li><code class="text-xs bg-accent-light text-accent px-1 py-0.5 rounded font-mono">flex-shrink-0</code> → 替换为 <code class="text-xs bg-accent-light text-accent px-1 py-0.5 rounded font-mono">shrink-0</code></li>
+            <li><code class="text-xs bg-accent-light text-accent px-1 py-0.5 rounded font-mono">flex-grow-0</code> → 替换为 <code class="text-xs bg-accent-light text-accent px-1 py-0.5 rounded font-mono">grow-0</code></li>
+            <li><code class="text-xs bg-accent-light text-accent px-1 py-0.5 rounded font-mono">decoration-slice</code> → 已移除，使用默认行为</li>
+            <li><code class="text-xs bg-accent-light text-accent px-1 py-0.5 rounded font-mono">placeholder-*</code> 系列 → 部分重命名</li>
+          </ul>
+
+          <p class="text-muted text-sm leading-relaxed mb-4">
+            建议在项目中全局搜索 <code class="text-xs bg-accent-light text-accent px-1 py-0.5 rounded font-mono">flex-shrink</code>、
+            <code class="text-xs bg-accent-light text-accent px-1 py-0.5 rounded font-mono">flex-grow</code>、
+            <code class="text-xs bg-accent-light text-accent px-1 py-0.5 rounded font-mono">decoration-</code> 并做替换。
+          </p>
+
+          <h2 class="text-lg font-semibold text-text mt-10 mb-3">迁移后的收益</h2>
+          <ul class="space-y-2 mb-5 text-muted text-sm leading-relaxed list-disc pl-5">
+            <li><strong class="text-text">构建速度提升约 30%</strong> — 不再需要 PostCSS 处理管道。</li>
+            <li><strong class="text-text">CSS 产物体积减小</strong> — 自动内容扫描更精准，未使用的类不再生成。</li>
+            <li><strong class="text-text">配置更直观</strong> — 在 CSS 中定义设计令牌，与 W3C 自定义属性规范一致。</li>
+            <li><strong class="text-text">编辑器体验改善</strong> — @theme 中的定义可以直接被 CSS 语言服务器识别。</li>
+          </ul>
+
+          <h2 class="text-lg font-semibold text-text mt-10 mb-3">踩坑记录</h2>
+          <ol class="space-y-3 mb-5 text-muted text-sm leading-relaxed list-decimal pl-5">
+            <li>
+              <strong class="text-text">@config 指令兼容</strong>：v4 支持 <code class="text-xs bg-accent-light text-accent px-1 py-0.5 rounded font-mono">@config "./tailwind.config.js"</code>
+              加载旧配置，但部分 v3 特性（如 <code class="text-xs bg-accent-light text-accent px-1 py-0.5 rounded font-mono">safelist</code>）不生效。
+              建议彻底迁移到 @theme。
+            </li>
+            <li>
+              <strong class="text-text">第三方插件兼容性</strong>：许多 v3 插件尚未适配 v4。
+              迁移前检查关键插件（如 typography、forms）的 v4 兼容状态。
+            </li>
+            <li>
+              <strong class="text-text">CSS 文件顺序</strong>：v4 中 <code class="text-xs bg-accent-light text-accent px-1 py-0.5 rounded font-mono">@import 'tailwindcss'</code>
+              必须在其它自定义样式之前，否则层叠优先级可能出错。
+            </li>
+          </ol>
+
+          <h2 class="text-lg font-semibold text-text mt-10 mb-3">总结</h2>
+          <p class="text-muted text-sm leading-relaxed mb-5">
+            Tailwind CSS v4 的迁移工作量主要集中在前三步：安装插件、改 CSS 入口、迁移 @theme 配置。
+            对于中小型项目（&lt; 50 个组件），整个迁移过程大约需要 1–2 小时。
+            迁移后的构建速度和开发体验提升是值得的——尤其对于 Vite 用户，v4 的集成更加原生、简洁。
+          </p>
+        </article>
+
+        <footer class="md:hidden border-t border-border mt-12 pt-6 text-center text-xs text-faint">
+          &copy; 2026 Huoxin
+        </footer>
+
+      </main>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
