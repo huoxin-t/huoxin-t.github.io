@@ -19,7 +19,7 @@ function getBlogPosts() {
 // GitHub Pages base path — edit to match your repo name.
 // User/org site (xxx.github.io) → '/'
 // Project site (xxx.github.io/repo) → '/repo/'
-const base = '/huoxin_protflio/'
+const base = '/'
 
 export default defineConfig({
   base,
