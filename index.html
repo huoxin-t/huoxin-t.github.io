@@ -95,60 +95,92 @@
           <div class="section-label">作品集</div>
 
           <!-- 项目卡片 1 -->
-          <div class="mb-12 bg-surface border border-border rounded-xl overflow-hidden hover:shadow-md transition-shadow group">
-            <div class="aspect-video bg-border-light flex items-center justify-center text-faint text-sm">
-              <!-- 替换为图片：<img src="/images/project-1.png" alt="项目截图" class="w-full h-full object-cover" /> -->
-              <span class="text-6xl select-none">🖼️</span>
+          <div class="mb-12 bg-surface border border-border rounded-xl overflow-hidden hover:shadow-md transition-shadow">
+            <div class="carousel aspect-video relative overflow-hidden bg-border-light group/carousel cursor-pointer">
+              <!-- ★ 把 /images/project-1-*.png 换成你的截图文件名 ★ -->
+              <img src="/images/project-1-a.png" alt="项目截图 1" class="carousel-slide active" />
+              <img src="/images/project-1-b.png" alt="项目截图 2" class="carousel-slide" />
+              <img src="/images/project-1-c.png" alt="项目截图 3" class="carousel-slide" />
+              <button class="carousel-btn carousel-prev left-2" aria-label="上一张">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+              </button>
+              <button class="carousel-btn right-2 carousel-next" aria-label="下一张">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </button>
+              <div class="carousel-dots absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex gap-1.5">
+                <button class="carousel-dot carousel-dot--active" aria-label="第1张"></button>
+                <button class="carousel-dot" aria-label="第2张"></button>
+                <button class="carousel-dot" aria-label="第3张"></button>
+              </div>
             </div>
             <div class="p-6">
               <h3 class="text-lg font-semibold text-text mb-2 group-hover:text-accent transition-colors">
-                项目一：响应式组件库
+                投票项目(Voting System)
               </h3>
               <p class="text-muted text-sm leading-relaxed mb-4">
-                一套轻量级的 React 组件库，内置深色模式支持与完整的可访问性特性。
-                所有组件经过单元测试与 E2E 测试覆盖，兼容主流浏览器。
+                基于 **React 18 + Ant Design 5 + Redux Toolkit + Socket.io** 的全栈投票应用，用户可以快速创建单选/多选投票、设定截止时间、选择匿名或公开模式，并通过私密链接分享给指定人群。
+                ReadingFilter
               </p>
               <div class="flex flex-wrap gap-2 mb-4">
                 <span class="tag">React</span>
-                <span class="tag">TypeScript</span>
-                <span class="tag">Tailwind CSS</span>
+                <span class="tag">Socket.io</span>
+                <span class="tag">ORM </span>
+                <span class="tag">全栈</span>
               </div>
               <div class="flex gap-4 text-sm">
-                <a href="#" class="inline-flex items-center gap-1 text-accent font-medium hover:underline">在线演示 &rarr;</a>
-                <a href="#" class="inline-flex items-center gap-1 text-muted hover:text-accent transition-colors">源代码 &rarr;</a>
+                <a href="https://livefff.asia/" class="inline-flex items-center gap-1 text-accent font-medium hover:underline">在线演示 &rarr;</a>
+                <a href="https://github.com/huoxin-t/vote" class="inline-flex items-center gap-1 text-muted hover:text-accent transition-colors">源代码 &rarr;</a>
               </div>
             </div>
           </div>
 
           <!-- 项目卡片 2 -->
-          <div class="mb-12 bg-surface border border-border rounded-xl overflow-hidden hover:shadow-md transition-shadow group">
-            <div class="aspect-video bg-border-light flex items-center justify-center text-faint text-sm">
-              <span class="text-6xl select-none">🖼️</span>
+          <div class="mb-12 bg-surface border border-border rounded-xl overflow-hidden hover:shadow-md transition-shadow">
+            <div class="aspect-video relative overflow-hidden bg-border-light">
+              <video
+                src="/images/project-2-demo.mp4"
+                class="w-full h-full object-cover"
+                controls
+                playsinline
+                preload="metadata"
+                aria-label="Maa 官网交互演示录屏"
+              ></video>
             </div>
             <div class="p-6">
               <h3 class="text-lg font-semibold text-text mb-2 group-hover:text-accent transition-colors">
-                项目二：前端构建工具插件
+                Maa开源贡献
               </h3>
               <p class="text-muted text-sm leading-relaxed mb-4">
-                为 Vite 开发的一款可视化分析插件，支持模块依赖图、构建产物体积分析、
-                及热更新性能监控面板。
+              基于实际使用场景，发现原官网存在信息展示单向、内容不可扩展的问题，影响用户浏览效率。重新设计交互结构，实现“可展开/收起”的内容展示模式，提升信息密度与可操作性 针对折叠过程中 DOM 卸载导致的布局跳跃问题，优化渲染策略（如保留节点/动画协调），提升交互流畅性。
+
               </p>
               <div class="flex flex-wrap gap-2 mb-4">
                 <span class="tag">Vite</span>
-                <span class="tag">Node.js</span>
-                <span class="tag">构建工具</span>
+                <span class="tag">TS</span>
+                <span class="tag">开源</span>
               </div>
               <div class="flex gap-4 text-sm">
-                <a href="#" class="inline-flex items-center gap-1 text-accent font-medium hover:underline">在线演示 &rarr;</a>
-                <a href="#" class="inline-flex items-center gap-1 text-muted hover:text-accent transition-colors">源代码 &rarr;</a>
+                <a href="https://maa.plus/" class="inline-flex items-center gap-1 text-accent font-medium hover:underline">在线演示 &rarr;</a>
+                <a href="https://github.com/MaaAssistantArknights/maa-website" class="inline-flex items-center gap-1 text-muted hover:text-accent transition-colors">源代码 &rarr;</a>
               </div>
             </div>
           </div>
-
-          <!-- 项目卡片 3 -->
-          <div class="mb-12 bg-surface border border-border rounded-xl overflow-hidden hover:shadow-md transition-shadow group">
-            <div class="aspect-video bg-border-light flex items-center justify-center text-faint text-sm">
-              <span class="text-6xl select-none">🖼️</span>
+<!-- 
+         
+          <div class="mb-12 bg-surface border border-border rounded-xl overflow-hidden hover:shadow-md transition-shadow">
+            <div class="carousel aspect-video relative overflow-hidden bg-border-light group/carousel cursor-pointer">
+              <img src="/images/project-3-a.svg" alt="项目截图 1" class="carousel-slide active" />
+              <img src="/images/project-3-b.svg" alt="项目截图 2" class="carousel-slide" />
+              <button class="carousel-btn carousel-prev left-2" aria-label="上一张">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+              </button>
+              <button class="carousel-btn right-2 carousel-next" aria-label="下一张">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </button>
+              <div class="carousel-dots absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex gap-1.5">
+                <button class="carousel-dot carousel-dot--active" aria-label="第1张"></button>
+                <button class="carousel-dot" aria-label="第2张"></button>
+              </div>
             </div>
             <div class="p-6">
               <h3 class="text-lg font-semibold text-text mb-2 group-hover:text-accent transition-colors">
@@ -166,6 +198,43 @@
               <div class="flex gap-4 text-sm">
                 <a href="#" class="inline-flex items-center gap-1 text-accent font-medium hover:underline">在线演示 &rarr;</a>
                 <a href="#" class="inline-flex items-center gap-1 text-muted hover:text-accent transition-colors">源代码 &rarr;</a>
+              </div>
+            </div>
+          </div> -->
+  <!-- 项目卡片 4 -->
+          <div class="mb-12 bg-surface border border-border rounded-xl overflow-hidden hover:shadow-md transition-shadow">
+            <div class="carousel aspect-video relative overflow-hidden bg-border-light group/carousel cursor-pointer">
+              <img src="/images/project-4-a.png" alt="项目截图 1" class="carousel-slide active" />
+              <img src="/images/project-4-b.png" alt="项目截图 2" class="carousel-slide" />
+              <img src="/images/project-4-c.png" alt="项目截图 3" class="carousel-slide" />
+              <button class="carousel-btn carousel-prev left-2" aria-label="上一张">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+              </button>
+              <button class="carousel-btn right-2 carousel-next" aria-label="下一张">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </button>
+              <div class="carousel-dots absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex gap-1.5">
+                <button class="carousel-dot carousel-dot--active" aria-label="第1张"></button>
+                <button class="carousel-dot" aria-label="第2张"></button>
+                <button class="carousel-dot" aria-label="第3张"></button>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-lg font-semibold text-text mb-2 group-hover:text-accent transition-colors">
+                ReadingFilter (阅读困难辅助工具)
+              </h3>
+              <p class="text-muted text-sm leading-relaxed mb-4">
+                基于 Vite + Tailwind CSS v4 构建的极简静态博客模板，支持多页面构建、
+                自动暗色模式、Markdown 文章管理与学术风格的侧边栏布局。
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="tag">Python</span>
+                <span class="tag">ADHD</span>
+                <span class="tag">vibe coding</span>
+              </div>
+              <div class="flex gap-4 text-sm">
+                <!-- <a href="#" class="inline-flex items-center gap-1 text-accent font-medium hover:underline">在线演示 &rarr;</a> -->
+                <a href="https://github.com/huoxin-t/ReadingFilter" class="inline-flex items-center gap-1 text-muted hover:text-accent transition-colors">源代码 &rarr;</a>
               </div>
             </div>
           </div>
